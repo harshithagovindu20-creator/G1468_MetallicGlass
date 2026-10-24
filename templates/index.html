@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metallic Glass GFA Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+        h1 { color: #17365d; text-align: center; }
+        p { text-align: center; color: #555; }
+        label { display: block; margin-top: 18px; font-weight: bold; }
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 11px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 25px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eaf4ff;
+            border-radius: 8px;
+        }
+        .error { color: #b00020; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Metallic Glass GFA Prediction</h1>
+    <p>Machine Learning-Based Alloy Analysis</p>
+
+    <form method="POST" action="/">
+        <label for="zr">Zirconium (Zr) at %</label>
+        <input id="zr" name="zr" type="number" min="0" max="100"
+               step="any" required>
+
+        <label for="cu">Copper (Cu) at %</label>
+        <input id="cu" name="cu" type="number" min="0" max="100"
+               step="any" required>
+
+        <label for="ni">Nickel (Ni) at %</label>
+        <input id="ni" name="ni" type="number" min="0" max="100"
+               step="any" required>
+
+        <label for="al">Aluminium (Al) at %</label>
+        <input id="al" name="al" type="number" min="0" max="100"
+               step="any" required>
+
+        <button type="submit">Predict Glass-Forming Properties</button>
+    </form>
+
+    {% if error %}
+    <div class="result error">{{ error }}</div>
+    {% endif %}
+
+    {% if predictions %}
+    <div class="result">
+        <h3>Predicted Temperatures</h3>
+        <p>Glass Transition Temperature (Tg): {{ predictions.Tg }} K</p>
+        <p>Crystallization Temperature (Tx): {{ predictions.Tx }} K</p>
+        <p>Liquidus Temperature (Tl): {{ predictions.Tl }} K</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
+
